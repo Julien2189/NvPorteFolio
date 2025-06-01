@@ -162,3 +162,31 @@ nav a {
   size: 50px;
 
 }
+@media screen and (max-width:768px) {
+    .nav {
+      display: none;
+    }
+    .burger {
+      display: block;
+      width: 30px;
+      margin: 10px;
+      cursor: pointer;
+    }
+    .burger span {
+      display: block;
+      height: 4px;
+      background: black;
+      margin: 5px 0;
+    }
+    .nav.show {
+      display: block;
+    }
+    .nav a {
+  display: block;
+  padding: 5px;
+  text-decoration: none;
+  color: black;
+}
+    }
+  
+}
