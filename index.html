@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio de Julien</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Julien</h1>
+    <h2 id="heure" style="color:white"></h2>
+    <p>Développeur Full-Stack | Passionné de microcontrôleurs, IA et FinTech</p>
+  </header>
+
+  <nav>
+    <a href="#apropos">À propos</a>
+    <a href="#competences">Compétences</a>
+    <a href="#projets">Projets</a>
+    <a href="#cv">CV</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="apropos">
+    <h2>À propos de moi</h2>
+    <p>
+      Je m'appelle Julien, développeur full-stack en reconversion passionné par le développement web, les microcontrôleurs, l'intelligence artificielle et la finance. Je développe des projets personnels pour approfondir mes compétences et construire un avenir solide dans la tech.
+    </p>
+  </section>
+
+  <section id="competences">
+    <h2>Compétences</h2>
+    <div class="skills">
+      <div class="card">HTML / CSS</div>
+      <div class="card">JavaScript / Node.js</div>
+      <div class="card">Angular</div>
+      <div class="card">Python / TensorFlow</div>
+      <div class="card">PHP / MySQL</div>
+      <div class="card">Git / GitHub</div>
+      <div class="card">Microcontrôleurs (PIC / ATtiny)</div>
+      <div class="card">Figma / UI Design</div>
+    </div>
+  </section>
+
+  <section id="projets">
+    <h2>Projets</h2>
+    <div class="projects">
+      <div class="card">
+        <h3>Chatbot en JavaScript</h3>
+        <p>Un bot conversationnel en JS avec JSON, hébergé sur GitHub Pages.</p>
+        <a href="https://julien2189.github.io/deuxiemeSite/" target="_blank">Voir le projet</a>
+      </div>
+      <div class="card">
+        <h3>Convertisseur de Devises</h3>
+        <p>Un convertisseur simple codé en JS, responsive et pratique.</p>
+        <a href="https://julien2189.github.io/convertisseur/" target="_blank">Voir le projet</a>
+      </div>
+      <div class="card">
+        <h3>Projet TensorFlow</h3>
+        <p>Une prédiction de prix Bitcoin avec TensorFlow, en apprentissage automatique.</p>
+      </div>
+      <div class="card">
+        <h3>Contrôle de LEDs WS2812B</h3>
+        <p>Projet microcontrôleur pour animer des LED RGB avec un ATtiny13A.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="cv">
+    <h2 id="btn1">Mon CV</h2>
+    <p><a href="#">Télécharger mon CV (à venir)</a></p>
+
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <form class="contact-form"  id="form">
+      <input type="text" name="nom" placeholder="Nom" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <textarea rows="5" name="message" placeholder="Votre message" required></textarea>
+      <button type="submit" id="btn">Envoyer</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Julien - Portfolio réalisé avec passion</p>
+    <p>
+      <a href="https://github.com/Julien2189" style="color:white;">GitHub</a> |
+      <a href="#" style="color:white;">LinkedIn</a>
+    </p>
+  </footer>
+<script>
+  function afficherDateHeure() {
+    const now = new Date() ;
+
+      const optionDate = {day: '2-digit' , month:'long' , year:'numeric'} ;
+  const optionHeure = {hour:'2-digit', minute:'2-digit' , second:'2-digit'} ;
+
+  const date = now.toLocaleDateString('fr-FR' ,optionDate) ;
+  const hour  = now.toLocaleTimeString('fr-FR' , optionHeure) ;
+  
+  return `${date} ${hour}` ;
+  }
+
+  console.log(afficherDateHeure());
+function heure(){
+ 
+
+  const heure = document.getElementById('heure');
+  heure.innerText =afficherDateHeure();
+}
+ setInterval(heure , 1000) ;
+ heure() ;
+ //class utilisateur
+  class Utilisateur  {
+    constructor(prenom , email , message) {
+      this._prenom = prenom ;
+      this._email  = email ; 
+      this._message = message ;
+      this.dateInscription = new Date().toLocaleDateString() ;
+      this.heureInscription= new Date().toLocaleTimeString() ;
+    }
+    get prenom () {
+      return this._prenom ;
+    }
+    set prenom ( nvPrenom) {
+      this._prenom = nvPrenom ;
+    }
+    get email() {
+      return this._email ;
+    }
+    set email(nvEmail) {
+      this._email = nvEmail  ;
+    }
+    get message () {
+      return this._message  ;
+    }
+    set message(nvMessage) {
+      this._message = nvMessage ;
+    }
+    afficher() {
+      return `Prenom : ${this.prenom }, email: ${this._email} le ${this.dateInscription} a ${this.heureInscription}`;
+    
+    }
+  }
+  const formulaire = document.getElementById('form') ;
+const btn = document.getElementById('btn') ;
+const date  = new Date() ;
+// recuperation formulaire
+formulaire.addEventListener('submit' , function(event){
+  const user = new Utilisateur() ;
+  event.preventDefault() ;
+  const formData = new FormData(event.target) ;
+  user.prenom = formData.get('nom');
+  user.email = formData.get('email') ;
+  user.message = formData.get('message') ;
+  console.log(user.afficher()) ;
+  console.log(user.message) ;
+  let utilisateur = JSON.parse(localStorage.getItem("utilisateur")) || [] ;
+  utilisateur.push({
+   prenom: user.prenom,
+        email: user.email,
+        message: user.message,
+        date: user.dateInscription,
+        heure: user.heureInscription
+    
+  });
+  localStorage.setItem('utilisateur' ,JSON.stringify(utilisateur)) ;
+  window.alert('formulaire envoyer') ;
+let expirationDate =new Date() ; 
+expirationDate.setHours(expirationDate.getHours() +1) ;
+document.cookie = `username=${encodeURIComponent(user.prenom)};expires=${expirationDate.toUTCString()};path=/;SameSite=Strict`;  console.log('le cookie a ete crée' , document.cookie) ;
+
+  const succesMsg = document.createElement('p') ;
+  succesMsg.innerText = "Merci pour votre message, julien vous repondra bientot  !" ;
+  succesMsg.style.color ="green" ;
+  this.appendChild(succesMsg) ;
+
+  this.reset() ;
+  setTimeout(()=> succesMsg.remove() ,5000) ;
+});
+btn.addEventListener('click' ,() => {
+
+}) ;
+</script>
+</body>
+</html>
