@@ -13,14 +13,20 @@
     <h2 id="heure" style="color:white"></h2>
     <p>Développeur Full-Stack | Passionné de microcontrôleurs, IA et FinTech</p>
   </header>
-
-  <nav>
-    <a href="#apropos">À propos</a>
-    <a href="#competences">Compétences</a>
-    <a href="#projets">Projets</a>
-    <a href="#cv">CV</a>
-    <a href="#contact">Contact</a>
-  </nav>
+    <div class="burger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+  </div>
+  <div class="nav" id="menu">
+      <nav>
+        <a href="#apropos">À propos</a>
+        <a href="#competences">Compétences</a>
+        <a href="#projets">Projets</a>
+        <a href="#cv">CV</a>
+        <a href="#contact">Contact</a>
+     </nav>
+     </div>
 
   <section id="apropos">
     <h2>À propos de moi</h2>
@@ -180,9 +186,10 @@ document.cookie = `username=${encodeURIComponent(user.prenom)};expires=${expirat
   this.reset() ;
   setTimeout(()=> succesMsg.remove() ,5000) ;
 });
-btn.addEventListener('click' ,() => {
 
-}) ;
+function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
+    }
 </script>
 </body>
 </html>
